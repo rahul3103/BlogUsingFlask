@@ -12,15 +12,20 @@ os.path.dirname(path) : Return the directory name of pathname path. This is the 
 
 """
 
-class config:
-	SECRET_KEY = os.environ.get('SECRET_KEY')
+class Config:
+	SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
 
 #The value of the SECRET_KEY, due to its sensitive nature, can be set in the environment, but a default value is provided in case the environment does not define it.
 
 	SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 
 #The configuration key SQLALCHEMY_COMMIT_ON_TEARDOWN, which can be set to True to enable automatic commits of database changes at the end of each request.
-
+	
+	MAIL_SERVER = 'smtp.googlemail.com'
+	MAIL_PORT = 587
+	MAIL_USE_TLS = True
+	MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+	MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
 	FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
 	FLASKY_MAIL_SENDER = 'Flasky Admin <flasky@example.com>'
 	FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
@@ -30,14 +35,9 @@ class config:
 		pass
 
 class DevelopmentConfig(Config):
-	DEBUG = True
-	MAIL_SERVER = 'smtp.googlemail.com'
-	MAIL_PORT = 587
-	MAIL_USE_TLS = True
-	MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-	MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-	SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
-	'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
+    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
+        'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
 
 #The SQLALCHEMY_DATABASE_URI variable is assigned different values under each of the three configurations. This enables the application to run under different configurations, each using a different database.
 
@@ -55,6 +55,7 @@ config = {
 	'development': DevelopmentConfig,
 	'testing': TestingConfig,
 	'production': ProductionConfig,
+	
 	'default': DevelopmentConfig
 }
 

@@ -1,0 +1,9 @@
+# Flask-Moment depends on jquery.js in addition to moment.js. These two libraries need to be included somewhere in the HTML document—either directly, in which case you can choose what versions to use, or through the helper functions provided by the extension, which reference tested versions of these libraries from a Content Delivery Network(CDN). Because Bootstrap already includes jquery.js, only moment.js needs to be added in this case.
+
+# The db object instantiated from class SQLAlchemy represents the database and provides access to all the functionality of Flask-SQLAlchemy.
+
+# The configuration settings stored in one of the classes defined in config.py can be imported directly into the application using the from_object() method available in Flask’s app.config configuration object. The configuration object is selected by name from the config dictionary. Once an application is created and configured, the extensions can be initialized.
+# Calling init_app() on the extensions that were created earlier completes their initialization.
+# attaching routes and custom error pages here
+
+#Blueprints are created by instantiating an object of class Blueprint. The constructor for this class takes two required arguments: the blueprint name and the module or package where the blueprint is located. As with applications, Python’s __name__ variable is in most cases the correct value for the second argument.
