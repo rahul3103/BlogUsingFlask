@@ -4,6 +4,7 @@ from flask.ext.mail import Mail
 from flask.ext.moment import Moment
 from flask.ext.sqlalchemy import SQLAlchemy
 from config import config
+from main import main as main_blueprint
 
 bootstrap = Bootstrap()
 
@@ -32,6 +33,8 @@ def create_app(config_name):
 
 #Calling init_app() on the extensions that were created earlier completes their initialization.
 
-# attach routes and custom error pages here
+# attaching routes and custom error pages here
+
+app.register_blueprint(main_blueprint)
 
 	return app
